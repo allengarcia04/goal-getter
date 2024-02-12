@@ -1,0 +1,72 @@
+<!-- Extend the "base.html" template -->
+{% extends "base.html" %}
+
+<!-- Set the title for this specific page -->
+{% block title %}Sign Up{% endblock %}
+
+<!-- Block for content to be injected into the "base.html" template -->
+{% block content %}
+<!-- Form for user sign-up via POST request -->
+<form method="POST">
+  <!-- Heading for the sign-up form -->
+  <h3 align="center">Join the Goal-Getter Community!</h3>
+
+  <!-- Form group for email input -->
+  <div class="form-group">
+    <label for="email">Email Address</label>
+    <!-- Input field for entering email -->
+    <input
+      type="email"
+      class="form-control"
+      id="email"
+      name="email"
+      placeholder="Enter email"
+    />
+  </div>
+
+  <!-- Form group for first name input -->
+  <div class="form-group">
+    <label for="firstName">First Name</label>
+    <!-- Input field for entering first name -->
+    <input
+      type="text"
+      class="form-control"
+      id="firstName"
+      name="firstName"
+      placeholder="Enter first name"
+    />
+  </div>
+
+  <!-- Form group for password input -->
+  <div class="form-group">
+    <label for="password1">Password</label>
+    <!-- Input field for entering password -->
+    <input
+      type="password"
+      class="form-control"
+      id="password1"
+      name="password1"
+      placeholder="Enter password"
+    />
+  </div>
+
+  <!-- Form group for confirming password input -->
+  <div class="form-group">
+    <label for="password2">Confirm Password</label>
+    <!-- Input field for confirming password -->
+    <input
+      type="password"
+      class="form-control"
+      id="password2"
+      name="password2"
+      placeholder="Confirm password"
+    />
+  </div>
+
+  <!-- Line break for better spacing -->
+  <br />
+
+  <!-- Button to submit the sign-up form -->
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

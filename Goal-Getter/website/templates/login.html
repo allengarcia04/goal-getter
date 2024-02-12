@@ -1,0 +1,49 @@
+<!-- Extend the "base.html" template -->
+{% extends "base.html" %}
+
+<!-- Set the title for this specific page -->
+{% block title %}Goal-Getter Login{% endblock %}
+
+<!-- Block for content to be injected into the "base.html" template -->
+{% block content %}
+<!-- Form for user login via POST request -->
+<form method="POST">
+  <!-- Heading for the login form -->
+  <h3 align="center">Welcome back Goal-Getter!</h3>
+  <div class="motivational-quote" align="center">
+    <p>"Believe you can and you're halfway there." - Theodore Roosevelt</p>
+  </div>
+
+  <!-- Form group for email input -->
+  <div class="form-group">
+    <label for="email">Email Address</label>
+    <!-- Input field for entering email -->
+    <input
+      type="email"
+      class="form-control"
+      id="email"
+      name="email"
+      placeholder="Enter email"
+    />
+  </div>
+
+  <!-- Form group for password input -->
+  <div class="form-group">
+    <label for="password">Password</label>
+    <!-- Input field for entering password -->
+    <input
+      type="password"
+      class="form-control"
+      id="password"
+      name="password"
+      placeholder="Enter password"
+    />
+  </div>
+
+  <!-- Line break for better spacing -->
+  <br />
+
+  <!-- Button to submit the login form -->
+  <button type="submit" class="btn btn-primary">Login</button>
+</form>
+{% endblock %}

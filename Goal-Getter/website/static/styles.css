@@ -1,0 +1,29 @@
+
+
+/* Apply Roboto font to the entire document */
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.navbar-nav a {
+    color: white !important;
+}
+
+/* Container Styling */
+.container {
+    margin-top: 20px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 20px;
+}
+
+/* Add Hover Effect to List Items */
+.list-group-item {
+    transition: background-color 0.3s ease;
+}
+
+.list-group-item:hover {
+    background-color: #F0F0F0; /* Light gray on hover */
+}
+
+

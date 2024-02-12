@@ -1,0 +1,52 @@
+<!-- Extend the "base.html" template -->
+{% extends "base.html" %}
+
+<!-- Set the title for this specific page -->
+{% block title %}Home{% endblock %}
+
+<!-- Block for content to be injected into the "base.html" template -->
+{% block content %}
+<!-- Line break for better spacing -->
+<br />
+
+<!-- Heading for the page -->
+<!-- Create a personalized greeting for users -->
+<h3 align="center">
+  Hey Goal-Getter, {{ user.first_name }}! Ready to smash your goals today?
+</h3>
+<br />
+<h1 align="center">Your Goals</h1>
+<br />
+
+<!-- Unordered list for displaying notes as list items -->
+<ul class="list-group list-group-flush" id="notes">
+  <!-- Loop through user's notes and display each as a list item -->
+  {% for note in user.notes %}
+  <li class="list-group-item">
+    <!-- Display the content of the note -->
+    {{ note.data }}
+
+    <!-- Close button for deleting the note -->
+    <button type="button" class="close" onClick="deleteNote({{ note.id }})">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </li>
+  {% endfor %}
+
+  <!-- Form for adding a new note via POST request -->
+  <form method="POST">
+    <!-- Textarea for entering the note content -->
+    <textarea name="note" id="note" class="form-control"></textarea>
+
+    <!-- Line break for better spacing -->
+    <br />
+
+    <!-- Button to submit the form and add a new note -->
+    <div align="center">
+      <button type="submit" class="btn btn-primary">Add Goal</button>
+    </div>
+  </form>
+
+  <!-- End of the content block -->
+  {% endblock %}
+</ul>

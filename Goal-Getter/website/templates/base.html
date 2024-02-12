@@ -1,0 +1,137 @@
+<!-- HTML5 Document Declaration: Specifies the HTML version being used -->
+<!DOCTYPE html>
+
+<!-- Opening HTML tag: Represents the root of the HTML document -->
+<html>
+
+  <!-- Head Section: Contains metadata and links to external resources -->
+  <head>
+    <!-- Character set declaration: Specifies the character encoding for the document -->
+    <meta charset="UTF-8" />
+    
+    <!-- Viewport Configuration: Defines how the webpage should be displayed on different devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Link to Bootstrap CSS: External stylesheet for styling the webpage -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    
+    <!-- Link to Font Awesome CSS: External stylesheet for including font icons -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+
+    <!-- Title Tag: Sets the title of the HTML document (used in browser tabs) -->
+    <title>{% block title %}Goal Tracker{% endblock %}</title>
+  </head>
+
+  <!-- Body Section: Contains the main content of the HTML document -->
+  <body>
+
+    <!-- Navigation Bar: Bootstrap component for site navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+      
+
+      <!-- Navbar Toggler Button: Enables collapsing navigation bar on small screens -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbar"
+      >
+        <!-- Navbar Toggler Icon: Icon indicating the toggling of the navigation bar -->
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Navbar Collapse Section: Contains the actual navigation links -->
+      <div class="collapse navbar-collapse" id="navbar">
+        
+        <!-- Navbar Navigation Links: Displayed horizontally in the navigation bar -->
+        <div class="navbar-nav">
+          
+          <!-- Conditional Block: Displays different links based on user authentication status -->
+          {% if user.is_authenticated %}
+          <a class="nav-item nav-link" id="home" href="/">Home</a>
+          <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+          {% else %}
+          <a class="nav-item nav-link" id="login" href="/login">Login</a>
+          <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
+          {% endif %}
+          
+        </div>
+        <span class="navbar-text ml-auto text-white">
+          Goal-Getter
+        </span>
+      </div>
+    </nav>
+    <!-- Context manager to create a local variable (messages) within a specific block -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    <!-- Check if there are flashed messages -->
+    {% if messages %}
+      <!-- Iterate through flashed messages and categories -->
+      {% for category, message in messages %}
+        <!-- Check the category of the flashed message (error or success) -->
+        {% if category == 'error' %}
+          <!-- Display an alert with a danger style for error messages -->
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {% else %}
+          <!-- Display an alert with a success style for other messages -->
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {% endif %}
+          <!-- Display the content of the flashed message -->
+          {{ message }}
+          <!-- Close button for dismissing the alert -->
+          <button type="button" class="close" data-dismiss="alert">
+            <!-- Close icon (X) -->
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+  
+
+
+    <!-- Container for page content -->
+<div class="container">{% block content %} {% endblock %}</div>
+
+<!-- Include jQuery library from CDN for dynamic content manipulation -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+<!-- Include Popper.js library from CDN for Bootstrap dropdowns, tooltips, and popovers -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+<!-- Include Bootstrap JavaScript library from CDN for interactive features and components -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+
+<!-- Block for injecting additional JavaScript code by child templates -->
+{% block javascript %}
+<script type="text/javascript">
+  // Function to delete a note via a POST request and redirect to the home page
+  function deleteNote(noteId) {
+    fetch("/delete-note", {
+      method: "POST",
+      body: JSON.stringify({ noteId: noteId }),
+    }).then((_res) => {
+      window.location.href = "/";
+    });
+  }
+</script>
+{% endblock %}
+
+<!-- Closing tags for the HTML body and document -->
+</body>
+</html>
+
